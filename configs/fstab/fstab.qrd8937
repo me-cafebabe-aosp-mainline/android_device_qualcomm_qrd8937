@@ -19,12 +19,9 @@
 # FRP
 /dev/block/by-name/config /frp emmc defaults defaults
 
-# Logical partitions (inside the "system" super partition)
-odm /odm ext4 noatime,ro logical,first_stage_mount
-product /product ext4 noatime,ro logical,first_stage_mount
-system /system ext4 noatime,ro logical,first_stage_mount
-system_ext /system_ext ext4 noatime,ro logical,first_stage_mount
-vendor /vendor ext4 noatime,ro logical,first_stage_mount
+# Logical partitions
+system /system ext4 noatime,ro first_stage_mount,logical
+vendor /vendor ext4 noatime,ro first_stage_mount,logical
 
 # Metadata
 /dev/block/by-name/oem /metadata ext4 nodev,noatime,nosuid,discard,data=journal,commit=1 check,formattable,first_stage_mount,metadata_csum

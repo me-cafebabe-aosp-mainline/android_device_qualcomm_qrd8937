@@ -12,8 +12,7 @@ $(call inherit-product, device/mainline/qcom-common/mainline_qcom-common.mk)
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 
 # Audio
-TARGET_AUDIO_MAINLINE_UCM_PROFILES := \
-    qcom-msm8937-qrd
+TARGET_AUDIO_MAINLINE_UCM_PROFILES := qcom-msm8937-qrd
 
 # Bootanimation
 TARGET_BOOTANIMATION_HALF_RES := true
@@ -29,10 +28,6 @@ TARGET_SUPPORTS_SUSPEND ?= false
 # Dynamic partitions
 PRODUCT_BUILD_SUPER_PARTITION := false
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
-
-# HIDL
-PRODUCT_PACKAGES += \
-    vndservicemanager
 
 # Init
 PRODUCT_PACKAGES += \
@@ -60,11 +55,6 @@ DEVICE_PACKAGE_OVERLAYS += \
 # Permissions
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:$(TARGET_COPY_OUT_ODM)/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml
-
-# Properties
-PRODUCT_VENDOR_PROPERTIES += \
-    persist.sys.zram_enabled=1 \
-    vendor.remoteproc.4080000_remoteproc.ignore=1
 
 # Scoped Storage
 $(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)

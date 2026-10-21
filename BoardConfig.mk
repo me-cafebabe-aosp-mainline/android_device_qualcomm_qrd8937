@@ -26,7 +26,6 @@ BOARD_KERNEL_CMDLINE := \
     $(MAINLINE_QCOM_SOC_ANDROIDBOOT_PARAMS) \
     $(MAINLINE_QCOM_SOC_KERNEL_PARAMS) \
     androidboot.hardware=qrd8937 \
-    androidboot.super_partition=system \
     androidboot.verifiedbootstate=orange \
     console=tty0 \
     lk2nd.pass-ramoops=zap \
@@ -50,9 +49,9 @@ TARGET_KERNEL_SOURCE := kernel/mainline/msm89x7-mainline
 TARGET_DTB_LIST_WILDCARD := \
     qcom/msm8937-qcom-qrd-sku1
 
-# The config is shared with the other MSM89x7 devices
 TARGET_KERNEL_CONFIG_EXT := \
-    device/xiaomi/mi89xx-mainline/mi89x7/kconfigs/config-postmarketos-qcom-msm89x7.aarch64 \
+    $(DEVICE_PATH)/configs/kernel/config-postmarketos-qcom-msm89x7.aarch64 \
+    $(DEVICE_PATH)/configs/kernel/fixup.config \
     kernel/mainline/configs/fragments/android-base-pre/common.config \
     kernel/mainline/configs/fragments/android-base-pre/arm64.config \
     kernel/configs/b/android-6.12/android-base.config \
@@ -77,8 +76,8 @@ TARGET_AUTO_COLLECT_KERNEL_MODULE_DEPS := true
 TARGET_OTA_ASSERT_DEVICE := qrd8937
 
 # Partitions
-SSI_PARTITIONS := product system system_ext
-TREBLE_PARTITIONS := odm vendor
+SSI_PARTITIONS := system
+TREBLE_PARTITIONS := vendor
 ALL_PARTITIONS := $(SSI_PARTITIONS) $(TREBLE_PARTITIONS)
 
 $(foreach p, $(call to-upper, $(ALL_PARTITIONS)), \
@@ -94,7 +93,6 @@ BOARD_CACHEIMAGE_PARTITION_SIZE := 268435456
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 10332634112 # 10332650496 - 16384
 
 # Partitions - dynamic
-# The "system" partition of the device is used as the super partition
 BOARD_SUPER_PARTITION_BLOCK_DEVICES := system
 BOARD_SUPER_PARTITION_METADATA_DEVICE := system
 BOARD_SUPER_PARTITION_SYSTEM_DEVICE_SIZE := 3221225472
@@ -111,9 +109,13 @@ $(foreach p, $(call to-upper, $(TREBLE_PARTITIONS)), \
     $(eval BOARD_$(p)IMAGE_EXTFS_INODE_COUNT := 4096))
 
 $(foreach p, $(call to-upper, $(SSI_PARTITIONS)), \
-    $(eval BOARD_$(p)IMAGE_PARTITION_RESERVED_SIZE := 83886080)) # 80 MB
-$(foreach p, $(call to-upper, $(TREBLE_PARTITIONS)), \
     $(eval BOARD_$(p)IMAGE_PARTITION_RESERVED_SIZE := 41943040)) # 40 MB
+$(foreach p, $(call to-upper, $(TREBLE_PARTITIONS)), \
+    $(eval BOARD_$(p)IMAGE_PARTITION_RESERVED_SIZE := 104857600)) # 100 MB
+
+# Properties
+TARGET_ODM_PROP += $(DEVICE_PATH)/configs/properties/odm.prop
+TARGET_VENDOR_PROP += $(DEVICE_PATH)/configs/properties/vendor.prop
 
 # Ramdisk
 BOARD_RAMDISK_USE_LZ4 := true
