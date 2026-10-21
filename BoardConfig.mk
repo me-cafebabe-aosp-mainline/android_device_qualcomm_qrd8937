@@ -30,7 +30,6 @@ BOARD_KERNEL_CMDLINE := \
     clk_ignore_unused \
     console=tty0 \
     lk2nd.pass-ramoops=zap \
-    lk2nd.pass-simplefb=autorefresh,xrgb8888 \
     pd_ignore_unused
 
 BOARD_KERNEL_CMDLINE += \
