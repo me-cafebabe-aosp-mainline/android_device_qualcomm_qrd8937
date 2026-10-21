@@ -12,7 +12,7 @@ $(call inherit-product, device/mainline/qcom-common/mainline_qcom-common.mk)
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 
 # Audio
-TARGET_AUDIO_MAINLINE_UCM_PROFILES := qcom-msm8937-qrd
+TARGET_AUDIO_MAINLINE_UCM_PROFILES := msm8937-qrd
 
 # Bootanimation
 TARGET_BOOTANIMATION_HALF_RES := true
