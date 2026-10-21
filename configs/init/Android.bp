@@ -1,0 +1,17 @@
+//
+// SPDX-FileCopyrightText: The LineageOS Project
+// SPDX-License-Identifier: Apache-2.0
+//
+
+prebuilt_etc {
+    name: "init.qrd8937.rc",
+    src: "init.qrd8937.rc",
+    sub_dir: "init/hw",
+    vendor: true,
+}
+
+prebuilt_etc {
+    name: "ueventd.qrd8937.rc",
+    src: "ueventd.qrd8937.rc",
+    vendor: true,
+}
