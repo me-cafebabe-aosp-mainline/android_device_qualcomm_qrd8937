@@ -40,6 +40,7 @@ PRODUCT_PACKAGES += \
     use_memfd.rc \
     zram.rc
 
+$(call soong_config_set,libinit,vendor_init_lib,//$(DEVICE_PATH):init_qrd8937)
 $(call soong_config_set,mainline_common_libinit,set_properties_from,devicetree)
 
 # Kernel
